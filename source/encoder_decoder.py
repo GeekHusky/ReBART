@@ -40,7 +40,7 @@ class EncoderDecoderTextDataset(Dataset):
             logger.info(examples[:5])
 
             
-            for i, ex in enumerate(examples[:5):
+            for i, ex in enumerate(examples[:5]):
                 print(ex[0])
                 print(ex[1])
                 print(ex[0][-1])
