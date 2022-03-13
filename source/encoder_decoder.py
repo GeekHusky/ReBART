@@ -40,10 +40,13 @@ class EncoderDecoderTextDataset(Dataset):
             logger.info(examples[:5])
 
             
-            for i, ex in enumerate(examples[:5]):
+            for i, ex in enumerate(examples[:3]):
                 print(ex[0])
                 print(ex[1])
                 print(ex[0][-1])
+                in_to = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(ex[0]))
+                print(in_to)
+                print(len(in_to))
             
             # Add prefix to the output so we can predict the first real token in the decoder
             inputs = [
