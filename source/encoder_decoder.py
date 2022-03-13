@@ -17,7 +17,7 @@ from source.train import evaluate, train, set_seed
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     datefmt="%m/%d/%Y %H:%M:%S",
-    level=logging.INFO,
+    level=logging.DEBUG,
 )
 logger = logging.getLogger(__name__)
 
@@ -360,6 +360,8 @@ def main():
             file_path=args.train_file,
             block_size=args.block_size,
         )
+        print("Before trainig")
+        print(args)
         global_step, tr_loss = train(
             args,
             train_dataset,
