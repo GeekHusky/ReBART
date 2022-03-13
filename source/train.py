@@ -222,11 +222,12 @@ def train(args, train_dataset, model, tokenizer, loss_fnc=get_loss, eval_dataset
     model_to_resize.resize_token_embeddings(len(tokenizer))
 
     model.zero_grad()
-    train_iterator = trange(epochs_trained, int(args.num_train_epochs), desc="Epoch")
+#     train_iterator = trange(epochs_trained, int(args.num_train_epochs), desc="Epoch")
     set_seed(args)  # Added here for reproducibility
 
-    for _ in train_iterator:
-        epoch_iterator = tqdm(train_dataloader, desc="Iteration")
+#     for _ in train_iterator:
+    for epoch in range(epochs_trained, int(args.num_train_epochs)):
+        epoch_iterator = tqdm(train_dataloader)
         for step, batch in enumerate(epoch_iterator):
 
             # Skip past any already trained steps if resuming training
@@ -253,6 +254,9 @@ def train(args, train_dataset, model, tokenizer, loss_fnc=get_loss, eval_dataset
                 model.zero_grad()
                 global_step += 1
 
+                epoch_iterator.set_description(f'Epoch {epoch}')
+                epoch_iterator.set_postfix(loss=tr_loss/(global_step+1))
+                
                 if args.logging_steps > 0 and global_step % args.logging_steps == 0:
                     # Log metrics
                     if args.eval_during_train:
