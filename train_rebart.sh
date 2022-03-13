@@ -9,6 +9,7 @@ cp $0 ${OUT_DIR}
 
 python -m source.encoder_decoder \
     --train_file ${DATA_DIR}/train.jsonl \
+    --eval_data_file ${DATA_DIR}/dev.jsonl \
     --out_dir $OUT_DIR \
     --model_type facebook/bart-large \
     --model_name_or_path facebook/bart-large \
