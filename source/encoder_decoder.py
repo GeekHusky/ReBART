@@ -57,12 +57,15 @@ class EncoderDecoderTextDataset(Dataset):
             max_output_length = min(
                 args.max_output_length, max([len(ex) for ex in outputs])
             )
+            
+            print("max_input_length",max_input_length)
+            print("max_output_length",max_output_length)
 
             input_lengths = [min(len(ex), max_input_length) for ex in inputs]
             output_lengths = [min(len(ex), max_output_length) for ex in outputs]
 
-            print(input_lengths)
-            print(output_lengths)
+            print("input_lengths",input_lengths)
+            print("output_lengths",output_lengths)
             
             inputs = [tokenizer.encode(
                 ex, add_special_tokens=False, max_length=max_input_length, pad_to_max_length=True)
