@@ -8,6 +8,7 @@ import math
 import nltk
 import argparse
 
+from scipy.stats import spearmanr 
 from scipy.stats import kendalltau 
 from tqdm import tqdm
 
@@ -138,6 +139,9 @@ def evaluate(filename):
     total, total_sents = 0, 0
     
     err = 0
+
+    gts = []
+    pds = []
     
     with open(filename) as file:
         lines = file.readlines()
@@ -145,6 +149,9 @@ def evaluate(filename):
             entry = json.loads(line.strip())
             gold, predictions = clean_output(entry["gold"], entry["predictions"])
             
+            gts.append(gold)
+            pds.append(predictions)
+
             total += 1
             total_sents += len(gold)
             
@@ -180,6 +187,7 @@ def evaluate(filename):
     print(" Kendall's Tau: {:.6f}".format(kendall_score / total))
     print(" LCS: {:.6f}".format(LCS / total_sents))
     print(" Rouge-S: {:.6f}".format(rouge / total))
+    print(" Spearman: {:.6f}".format(spearmanr(gts, pds, axis = None)[0]))
 
 def main():
     parser = argparse.ArgumentParser()
