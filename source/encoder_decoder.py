@@ -61,6 +61,9 @@ class EncoderDecoderTextDataset(Dataset):
             input_lengths = [min(len(ex), max_input_length) for ex in inputs]
             output_lengths = [min(len(ex), max_output_length) for ex in outputs]
 
+            print(input_lengths)
+            print(output_lengths)
+            
             inputs = [tokenizer.encode(
                 ex, add_special_tokens=False, max_length=max_input_length, pad_to_max_length=True)
                 for ex in inputs]
