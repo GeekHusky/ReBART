@@ -109,7 +109,7 @@ def clean_output(gold, predictions):
     """
 
     label = gold.replace("<eos>", "").strip()
-    labels = [int(id_[2:-1]) for id_ in label.split()]
+    labels = [int(id_) for id_ in label.split()]
     
     # handle cases when output is empty
     if len(predictions) == 0:
