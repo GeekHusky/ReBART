@@ -39,6 +39,12 @@ class EncoderDecoderTextDataset(Dataset):
             examples = load_data(file_path, args.task)
             logger.info(examples[:5])
 
+            
+            for i, ex in enumerate(examples[:5):
+                print(ex[0])
+                print(ex[1])
+                print(ex[0][-1])
+            
             # Add prefix to the output so we can predict the first real token in the decoder
             inputs = [
                 tokenizer.convert_tokens_to_ids(tokenizer.tokenize(ex[0]))
@@ -63,9 +69,6 @@ class EncoderDecoderTextDataset(Dataset):
 
             input_lengths = [min(len(ex), max_input_length) for ex in inputs]
             output_lengths = [min(len(ex), max_output_length) for ex in outputs]
-
-            print("input_lengths",input_lengths)
-            print("output_lengths",output_lengths)
             
             inputs = [tokenizer.encode(
                 ex, add_special_tokens=False, max_length=max_input_length, pad_to_max_length=True)
